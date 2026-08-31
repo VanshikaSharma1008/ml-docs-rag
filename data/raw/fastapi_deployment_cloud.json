@@ -1,0 +1,6 @@
+{
+  "url": "https://fastapi.tiangolo.com/deployment/cloud/",
+  "tool": "fastapi",
+  "source_type": "docs",
+  "text": "# Deploy FastAPI on Cloud Providers\nYou can use virtually\nany cloud provider\nto deploy your FastAPI application.\nIn most of the cases, the main cloud providers have guides to deploy FastAPI with them.\n## FastAPI Cloud\nFastAPI Cloud\nis built by the same author and team behind\nFastAPI\n.\nIt streamlines the process of\nbuilding\n,\ndeploying\n, and\naccessing\nan API with minimal effort.\nIt brings the same\ndeveloper experience\nof building apps with FastAPI to\ndeploying\nthem to the cloud. 🎉\nFastAPI Cloud is the primary sponsor and funding provider for the\nFastAPI and friends\nopen source projects. ✨\n## Cloud Providers - Sponsors\nSome other cloud providers ✨\nsponsor FastAPI\n✨ too. 🙇\nYou might also want to consider them to follow their guides and try their services:\nRender\nRailway"
+}

@@ -1,0 +1,6 @@
+{
+  "url": "https://fastapi.tiangolo.com/how-to/",
+  "tool": "fastapi",
+  "source_type": "docs",
+  "text": "# How To - Recipes\nHere you will see different recipes or \"how to\" guides for\nseveral topics\n.\nMost of these ideas would be more or less\nindependent\n, and in most cases you should only need to study them if they apply directly to\nyour project\n.\nIf something seems interesting and useful to your project, go ahead and check it, but otherwise, you might probably just skip them.\nTip\nIf you want to\nlearn FastAPI\nin a structured way (recommended), go and read the\nTutorial - User Guide\nchapter by chapter instead."
+}

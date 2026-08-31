@@ -1,0 +1,6 @@
+{
+  "url": "https://fastapi.tiangolo.com/advanced/security/",
+  "tool": "fastapi",
+  "source_type": "docs",
+  "text": "# Advanced Security\n## Additional Features\nThere are some extra features to handle security apart from the ones covered in the\nTutorial - User Guide: Security\n.\nTip\nThe next sections are\nnot necessarily \"advanced\"\n.\nAnd it's possible that for your use case, the solution is in one of them.\n## Read the Tutorial first\nThe next sections assume you already read the main\nTutorial - User Guide: Security\n.\nThey are all based on the same concepts, but allow some extra functionalities."
+}

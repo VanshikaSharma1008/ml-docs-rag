@@ -5,18 +5,14 @@ from pathlib import Path
 import requests
 
 from parse import parse_page
+from sitemap import get_urls
 
 RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "raw"
 
-URLS = [
-    "https://fastapi.tiangolo.com/tutorial/first-steps/",
-    "https://fastapi.tiangolo.com/tutorial/path-params/",
-    "https://fastapi.tiangolo.com/tutorial/query-params/",
-]
-
 
 def slugify(url):
-    return url.strip("/").split("/")[-1] or "index"
+    path = url.replace("https://fastapi.tiangolo.com/", "").strip("/")
+    return path.replace("/", "_") or "index"
 
 
 def scrape(url):
@@ -28,11 +24,17 @@ def scrape(url):
 def main():
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-    for url in URLS:
+    _, urls = get_urls()
+    print(f"Scraping {len(urls)} pages...\n")
+
+    ok, failed = 0, 0
+
+    for i, url in enumerate(urls, 1):
         try:
             text = scrape(url)
         except Exception as e:
-            print(f"FAILED {url}: {e}")
+            print(f"[{i}/{len(urls)}] FAILED {url}: {e}")
+            failed += 1
             continue
 
         record = {
@@ -45,8 +47,11 @@ def main():
         out = RAW_DIR / f"fastapi_{slugify(url)}.json"
         out.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
 
-        print(f"saved {out.name}  ({len(text)} chars)")
+        print(f"[{i}/{len(urls)}] {out.name}  ({len(text)} chars)")
+        ok += 1
         time.sleep(1)
+
+    print(f"\nDone. {ok} saved, {failed} failed.")
 
 
 if __name__ == "__main__":

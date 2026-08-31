@@ -1,0 +1,6 @@
+{
+  "url": "https://fastapi.tiangolo.com/advanced/testing-websockets/",
+  "tool": "fastapi",
+  "source_type": "docs",
+  "text": "# Testing WebSockets\nYou can use the same\nTestClient\nto test WebSockets.\nFor this, you use the\nTestClient\nin a\nwith\nstatement, connecting to the WebSocket:\nPython 3.10+\n```\nfrom fastapi import FastAPI\nfrom fastapi.testclient import TestClient\nfrom fastapi.websockets import WebSocket\n\napp = FastAPI()\n\n@app.get(\"/\")\nasync def read_main():\n    return {\"msg\": \"Hello World\"}\n\n@app.websocket(\"/ws\")\nasync def websocket(websocket: WebSocket):\n    await websocket.accept()\n    await websocket.send_json({\"msg\": \"Hello WebSocket\"})\n    await websocket.close()\n\ndef test_read_main():\n    client = TestClient(app)\n    response = client.get(\"/\")\n    assert response.status_code == 200\n    assert response.json() == {\"msg\": \"Hello World\"}\n\ndef test_websocket():\n    client = TestClient(app)\n    with client.websocket_connect(\"/ws\") as websocket:\n        data = websocket.receive_json()\n        assert data == {\"msg\": \"Hello WebSocket\"}\n```\nNote\nFor more details, check Starlette's documentation for\ntesting WebSockets\n."
+}
