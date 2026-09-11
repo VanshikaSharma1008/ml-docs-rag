@@ -16,6 +16,13 @@ def parse_page(html, url):
     for link in article.find_all("a", class_="headerlink"):
         link.decompose()
 
+    # 1b. Tabbed code variants (Python 3.8 / 3.9 / 3.10+) duplicate
+    #     the same example. Keep only the last tab in each set.
+    for tabbed in article.find_all("div", class_="tabbed-set"):
+        blocks = tabbed.find_all("div", class_="tabbed-block")
+        for block in blocks[:-1]:
+            block.decompose()
+
     # 2. Mark headings so chunking can use the structure later
     for level in range(1, 7):
         for heading in article.find_all(f"h{level}"):
@@ -29,6 +36,11 @@ def parse_page(html, url):
         # Terminal blocks embed escaped HTML for colouring — strip those tags
         if pre.find_parent("div", class_="termy"):
             raw = re.sub(r"<[^>]+>", "", raw)
+
+        # Base64 blobs (embedded images) carry no retrievable meaning
+        if re.search(r"[A-Za-z0-9+/]{200,}={0,2}", raw):
+            pre.replace_with(NavigableString("```\n[binary data omitted]\n```"))
+            continue
 
         pre.replace_with(NavigableString(f"```\n{raw.strip()}\n```"))
 
